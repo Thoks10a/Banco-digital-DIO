@@ -4,15 +4,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		Cliente cliente = new Cliente();
-		cliente.setNomeCliente("Jubiscreuson");
+		cliente.setNomeCliente("Bum");
+		//cliente.setNomeCliente("Murilo");
 		
-		Conta conta = new ContaCorrent(cliente);
+		Conta contac = new ContaCorrent(cliente);
 		Conta poupanca = new ContaPoupanca(cliente);
 
-		conta.depositar(500);
-		conta.transferir(200, poupanca);
+		contac.depositar(100);
+		contac.sacar(100);
+		contac.transferir(200, poupanca);
 		
-		conta.imprimir();
+		
+		
+		contac.imprimir();
 		poupanca.imprimir();
 
 	}

@@ -9,8 +9,9 @@ public abstract class Conta implements IGerenciarConta {
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
-	protected Banco banco;
-
+	protected Double transacaos;
+	protected Double transacaoc;
+	
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
 		this.numero = SEQUENCIAL++;
@@ -19,7 +20,14 @@ public abstract class Conta implements IGerenciarConta {
 
 	@Override
 	public void sacar(double valor) {
-		saldo -= valor;
+		if(this.saldo < valor) {
+			transacaoc = valor;
+			
+		}else {
+			saldo -= valor;
+		}
+		
+		
 	}
 
 	@Override
@@ -29,9 +37,19 @@ public abstract class Conta implements IGerenciarConta {
 
 	@Override
 	public void transferir(double valor, IGerenciarConta contaDestino) {
+		if(saldo < valor) {
+			//transacaos = valor;
+			cliente.setValue(valor);
+		}else {
+			
+		
 		this.sacar(valor);
 		contaDestino.depositar(valor);
+		}
+
 	}
+	
+	
 	
 
 	public int getAgencia() {
@@ -45,6 +63,14 @@ public abstract class Conta implements IGerenciarConta {
 	public double getSaldo() {
 		return saldo;
 	}
+	
+	/*public double getTransacaos() {
+		return transacaos;
+	}
+	
+	public void setTransacaos(double valor) {
+		this.transacaos = valor;
+	}*/
 
 	protected void ImprimirInformacoes() {
 		System.out.println(String.format("Titular da Conta: %s", this.cliente.getNomeCliente()));
